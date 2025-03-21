@@ -6,6 +6,9 @@ on:
   push:
     branches: master
       
+permissions:
+  contents: write
+
 jobs:
   build:
     strategy:
@@ -100,15 +103,15 @@ jobs:
       with:
         name: ${{ matrix.package }}-${{ matrix.arch }}-${{ matrix.os }}.7z
         path: ${{ matrix.package }}-${{ matrix.arch }}-${{ matrix.os }}.7z
-        
-    - name: Upload To Release
-      uses: svenstaro/upload-release-action@v1-release
+    
+    - name: Create Release and Upload Assets
+      uses: softprops/action-gh-release@v2
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ${{ matrix.package }}-${{ matrix.arch }}-${{ matrix.os }}.7z
-        asset_name: ${{ matrix.package }}-${{ matrix.arch }}-${{ matrix.os }}.7z
-        tag: release
-        overwrite: true
+        tag_name: release
+        name: Qv2ray Dependencies
+        files: ${{ matrix.package }}-${{ matrix.arch }}-${{ matrix.os }}.7z
+        draft: false
+        prerelease: false
         
 # 其余工作流保持不变
   build-tools:
@@ -141,13 +144,13 @@ jobs:
       with:
         name: grpc-tools-linux.7z
         path: grpc-tools-linux.7z
-        
-    - name: Upload To Release
-      uses: svenstaro/upload-release-action@v1-release
+
+    - name: Create Release and Upload Assets
+      uses: softprops/action-gh-release@v2
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: grpc-tools-linux.7z
-        asset_name: grpc-tools-linux.7z
-        tag: release
-        overwrite: true
+        tag_name: release
+        name: Qv2ray Dependencies
+        files: grpc-tools-linux.7z
+        draft: false
+        prerelease: false
 
