@@ -32,7 +32,7 @@ jobs:
     runs-on: ${{ matrix.runon }}
     
     steps:
-    - uses: actions/checkout@v2    
+    - uses: actions/checkout@v4    
     - name: Install vcpkg
       shell: bash
       run: |
@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build grpc tools for android
     steps:
-    - uses: actions/checkout@v2    
+    - uses: actions/checkout@v4    
     - name: Install vcpkg
       shell: bash
       run: |

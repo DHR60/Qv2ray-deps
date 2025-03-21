@@ -4,7 +4,6 @@ This repo contains [GitHub Action Scripts](https://github.com/Qv2ray/Qv2ray-deps
 
 ## Contents:
 - gRPC (protobuf)
-- cURL
 - OpenSSL
 
 ## Supported Platforms:
