@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        package: [grpc, curl, openssl]
+        package: [grpc, openssl]
         os: [windows, android]
         arch: [arm, arm64, x86, x64]
         exclude:
@@ -55,7 +55,6 @@ jobs:
       shell: bash
       run: |
         cd vcpkg
-        git apply -v ../0001_vcpkg_fix_curl_android_build.patch
         mkdir -p ./triplets/community
         echo "
         set(VCPKG_TARGET_ARCHITECTURE ${{ matrix.arch }})
