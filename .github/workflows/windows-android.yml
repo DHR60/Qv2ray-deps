@@ -48,6 +48,9 @@ jobs:
         large-packages: true
         swap-storage: true
         docker-images: true
+
+    - name: Install 7z
+      uses: milliewalky/setup-7-zip@v2
     
     - name: Setup Android NDK
       if: matrix.os == 'android'
@@ -132,7 +135,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Build grpc tools for android
     steps:
-    - uses: actions/checkout@v4    
+    - uses: actions/checkout@v4
+    - name: Install 7z
+      uses: milliewalky/setup-7-zip@v2    
     - name: Install vcpkg
       shell: bash
       run: |
@@ -148,9 +153,8 @@ jobs:
         ./vcpkg install grpc
 
     - name: Create Tools 7z
-      uses: edgarrc/action-7z@v1
-      with:
-        args: 7z a -t7z -mx=5 grpc-tools-linux.7z ./vcpkg/installed/x64-linux/tools
+      shell: bash
+      run: 7z a -t7z -mx=9 -mfb=273 -ms -md=31 grpc-tools-linux.7z ./vcpkg/installed/x64-linux/tools
 
     - name: Upload Artifact
       uses: actions/upload-artifact@master
