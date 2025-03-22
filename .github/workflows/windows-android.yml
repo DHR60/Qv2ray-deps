@@ -35,7 +35,19 @@ jobs:
     runs-on: ${{ matrix.runon }}
     
     steps:
-    - uses: actions/checkout@v4    
+    - uses: actions/checkout@v4
+
+    - name: Free Disk Space (Ubuntu)
+      if: matrix.os == 'android' && matrix.package == 'grpc'
+      uses: Jayllyz/free-disk-space@perf/use-rmz
+      with:
+        tool-cache: true
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
+        docker-images: true
     
     - name: Setup Android NDK
       if: matrix.os == 'android'
